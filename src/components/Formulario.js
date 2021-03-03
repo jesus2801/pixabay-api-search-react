@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
-const Formulario = () => {
+const Formulario = ({saveSearch}) => {
   const [word, saveWord] = useState('');
   const [err, saveErr] = useState(false);
 
@@ -18,6 +19,7 @@ const Formulario = () => {
     saveErr(false);
 
     //enviar termino hacia el componente principal
+    saveSearch(word);
   };
 
   return (
@@ -43,6 +45,10 @@ const Formulario = () => {
       {err ? <Error message="Please add a search term" /> : null}
     </form>
   );
+};
+
+Formulario.propTypes = {
+  saveSearch: PropTypes.func.isRequired,
 };
 
 export default Formulario;
